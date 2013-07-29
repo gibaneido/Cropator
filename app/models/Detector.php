@@ -13,7 +13,7 @@ class Detector {
 
   public function setTargetFromUrl($url)
   {
-   $data = file_get_contents(Input::get('url'));
+   $data = file_get_contents($url);
 
    $this->target = imagecreatefromstring($data);
   }
@@ -26,6 +26,21 @@ class Detector {
   public function getSample()
   {
     return $this->engine->toJpeg();
+  }
+  
+  public function getTarget()
+  {
+    return $this->target;
+  }
+
+  public function getJson()
+  {
+    return $this->engine->toJson();
+  }
+  
+  public function getFaceCoords()
+  {
+    return $this->engine->getFace();
   }
 
 }
