@@ -1,6 +1,6 @@
 ## Cropator
 
-Um experimento em Laravel para detectar rostos automaticamente.
+Um experimento em Laravel para detectar rostos automagicamente.
 
 ### Exemplo de uso
 
