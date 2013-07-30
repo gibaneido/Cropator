@@ -1,6 +1,7 @@
 <?php
 
-Route::get('/', function() {
+Route::get('/', function()
+{
 
   return Redirect::to('/detect');
 });
@@ -70,5 +71,42 @@ Route::get('/square', function($url = null)
   
   header('Content-type: image/jpeg');
   imagejpeg($canvas);
+
+});
+
+Route::get('/thumb', function($url = null) 
+{
+  if ( ! Input::has('url')) {
+    return 'Passe o parâmetro ?url=http://exemplo/imagem.jpg';
+  }
+
+
+  $crop_w = 220;
+  $crop_h = 140;
+
+  $dest = imagecreatetruecolor(
+      (int) $crop_w,
+      (int) $crop_h
+    );
+
+  $src = imagecreatefromjpeg(Input::get('url'));
+
+  $isOk = imagecopyresampled(
+    $dest,
+    $src,
+    0,
+    0,
+    0,
+    0,
+    imagesx($dest),
+    imagesy($dest),
+    imagesx($src),
+    imagesy($src)
+  );
+
+  header('Content-type: image/jpeg');
+  imagejpeg($dest);
+
+
 
 });
